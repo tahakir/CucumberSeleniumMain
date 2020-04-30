@@ -1,6 +1,7 @@
 package com.vytrack.step_definitions;
 
 import com.vytrack.pages.fleet.VehiclesPage;
+import com.vytrack.utilities.BrowserUtilities;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 
@@ -13,6 +14,7 @@ public class CreateCarStepDefinitions {
     @Then("user click on create a car button")
     public void user_click_on_create_a_car_button() {
         System.out.println("User click on create a car button");
+        BrowserUtilities.waitForPageToLoad(10);
         vehiclesPage.clickToCreateCar();
     }
 
@@ -23,6 +25,7 @@ public class CreateCarStepDefinitions {
     public void user_creates_a_car_with_following_info(List<Map<String, String>> dataTable) {
         System.out.println(dataTable);
         for (Map<String, String> row : dataTable) {
+            BrowserUtilities.waitForPageToLoad(10);
             vehiclesPage.setLicencePlateInput(row.get("License Plate"));
 
             vehiclesPage.setDriverInput(row.get("Driver"));
@@ -40,6 +43,7 @@ public class CreateCarStepDefinitions {
     @Then("user verifies that car info is displayed:")
     public void user_verifies_that_car_info_is_displayed(List<Map<String, String>> dataTable) {
         for(Map<String, String> row: dataTable){
+            BrowserUtilities.waitForPageToLoad(10);
             Assert.assertEquals(row.get("License Plate"), vehiclesPage.getCarGeneralInfo("License Plate"));
             Assert.assertEquals(row.get("Driver"), vehiclesPage.getCarGeneralInfo("Driver"));
             Assert.assertEquals(row.get("Location"), vehiclesPage.getCarGeneralInfo("Location"));
